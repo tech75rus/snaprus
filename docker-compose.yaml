@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/api/dev/Dockerfile
+    image: image_marina_api_dev
+    volumes:
+      - ./api:/var/www/api
+    ports:
+      - 80:8000
+    restart: always
+    container_name: marina_api_dev
+    entrypoint: ['/bin/sh', '/install.sh']
+#    depends_on:
+#      - db
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/app/dev/Dockerfile
+    image: image_marina_app_dev
+    volumes:
+      - ./app:/var/www/app
+    ports:
+      - 7777:8080
+    restart: always
+    container_name: marina_app_dev
+    entrypoint: ['/bin/sh', '/install.sh']
+
+#  admin:
+#    build:
+#      context: ./
+#      dockerfile: ./docker/admin/dev/Dockerfile
+
+  db:
+    build:
+      context: ./
+      dockerfile: ./docker/db/dev/Dockerfile
+    image: image_marina_db_dev
+    restart: always
+    ports:
+      - 1117:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: marina
+      MYSQL_USER: marina
+      MYSQL_PASSWORD: 1234
+    container_name: marina_db_dev
+
+volumes:
+  mysql:
