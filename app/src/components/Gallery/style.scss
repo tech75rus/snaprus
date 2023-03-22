@@ -1,7 +1,26 @@
+@mixin like {
+  position: relative;
+  svg {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    z-index: 50;
+  }
+  .shadow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+    height: 50px;
+    background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 100%);
+    box-shadow: none;
+  }
+
+}
 @mixin gallery-small {
   display: flex;
   flex-direction: column;
-  div {
+  &>div {
     background: #fff;
     box-shadow: 2px 4px 15px -4px #000000;
     border-radius: 4px;
@@ -9,6 +28,7 @@
     display: flex;
     aspect-ratio: 5 / 4;
     margin-bottom: 18%;
+    @include like;
   }
 }
 @mixin gallery-middle {
@@ -16,11 +36,12 @@
   grid-template-columns: 1fr 1fr;
   margin-bottom: 13%;
   grid-gap: 10%;
-  div {
+  &>div {
     box-shadow: 2px 4px 15px -4px #000000;
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 10%;
+    @include like;
   }
 }
 @mixin gallery-big {
@@ -31,6 +52,7 @@
   div {
     margin-bottom: 0;
     aspect-ratio: unset;
+    @include like;
   }
 }
 

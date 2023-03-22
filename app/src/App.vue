@@ -3,7 +3,7 @@
     <div class="menu">
       <div class="center">
         <div class="logo">
-          <p>Marina design</p>
+          <p>Marina Design</p>
         </div>
         <div class="user">
           <p>User</p>
@@ -44,6 +44,7 @@ body {
   left: 0;
   display: flex;
   box-shadow: 2px 0 12px -4px #000000;
+  z-index: 100;
 
   .center {
     margin: 0 auto;
