@@ -25,9 +25,12 @@
 body {
   background: #f6f1ff;
 }
+svg {
+  fill: #2c3e50;
+}
 #app {
 //  font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-family: Inter-Regular;
+  font-family: Inter-Regular,serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -68,7 +71,6 @@ body {
       }
       svg {
         width: 22px;
-        fill: #2c3e50;
       }
     }
 

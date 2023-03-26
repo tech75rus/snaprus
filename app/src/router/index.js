@@ -1,11 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from "@/views/HomeView.vue";
+import WorkView from "@/views/WorkView.vue";
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/work/:id',
+    name: 'work',
+    component: WorkView,
+    meta: {
+      title: 'Work'
+    }
   },
 ]
 

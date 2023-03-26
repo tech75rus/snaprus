@@ -22,8 +22,6 @@ export default {
 svg {
   width: 30px;
   height: 30px;
-  fill: #D2B9FF;
-  fill: #FFF;
 }
 .home {
   margin: 0 11%;
