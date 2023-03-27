@@ -30,6 +30,10 @@
     <div class="comment">
       <h2>Комментарии</h2>
       <div class="comments">
+        <form class="comment-form">
+          <textarea name="comment" placeholder="Отправить комментарий" rows="5"></textarea>
+          <button>Отправить</button>
+        </form>
         <div class="comment-user">
           <h4>Guest</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ducimus molestias tempore!</p>
@@ -37,19 +41,15 @@
         </div>
         <div class="comment-user">
           <h4>Guest</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ducimus molestias tempore!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur cumque laudantium non placeat quisquam quod soluta totam. Animi, assumenda blanditiis consequatur deserunt error esse harum iusto quaerat, quis reprehenderit similique sint tempora ullam vero vitae? Aliquam architecto, aut distinctio doloremque et, fugit ipsa iusto mollitia nostrum officiis omnis pariatur perspiciatis qui quod tenetur voluptas voluptatem. Ab animi asperiores at blanditiis, commodi delectus dolorum fuga hic illum iure magnam molestias officiis omnis perspiciatis quibusdam ut velit vitae. Architecto culpa debitis earum excepturi in laudantium magni recusandae rem veniam voluptate.</p>
           <span class="comment-date">25.03.23</span>
         </div>
         <div class="comment-user">
           <h4>Guest</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum ducimus molestias tempore!</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cum dicta earum harum illo in, iure laborum necessitatibus numquam quibusdam similique veniam vero voluptates? Atque consectetur iste itaque mollitia praesentium quibusdam quis temporibus?</p>
           <span class="comment-date">25.03.23</span>
         </div>
       </div>
-      <form class="comment-form">
-        <textarea name="comment" placeholder="Отправить комментарий" rows="5"></textarea>
-        <button>Отправить</button>
-      </form>
     </div>
   </div>
 </template>
@@ -104,31 +104,48 @@ export default {
     }
     .comments {
       .comment-user {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        margin-bottom: 25px;
+        padding: 5px;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 2px 4px 15px -4px #000000;
+
         h4 {
           margin-bottom: 3px;
         }
-        text-align: start;
-        margin-bottom: 15px;
-
         .comment-date {
           font-size: .8rem;
+          text-align: end;
+          margin-top: 15px;
         }
       }
     }
     .comment-form {
-      margin-top: 40px;
+      margin: 40px 0 40px 0;
       display: flex;
       flex-direction: column;
       textarea {
         font-size: 1rem;
         max-width: 100%;
         padding: 5px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 2px 4px 15px -4px #000000;
+        border: none;
+        outline: none;
       }
       button {
         align-self: end;
-        padding: 5px;
         width: 200px;
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
       }
     }
   }
