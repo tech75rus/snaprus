@@ -54,13 +54,18 @@ class LikesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Likes
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findLikes(int $userId, int $workId): array|bool
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM likes
+            WHERE (likes.work_id = :work_id AND likes.user_id = :user_id)
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId, 'work_id' => $workId]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetch();
+    }
 }
