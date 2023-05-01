@@ -39,21 +39,6 @@ class LikesRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Likes[] Returns an array of Likes objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
     public function findLikes(int $userId, int $workId): array|bool
     {
         $conn = $this->getEntityManager()->getConnection();

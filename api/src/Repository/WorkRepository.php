@@ -39,28 +39,36 @@ class WorkRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Work[] Returns an array of Work objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('w.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findWorksLikes(int $userId): array|bool
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-//    public function findOneBySomeField($value): ?Work
+        $sql = '
+            SELECT w.*, l.likes_bool FROM work AS w
+            INNER JOIN likes l on w.id = l.work_id
+            INNER JOIN user u on l.user_id = u.id
+            WHERE u.id = :user_id ORDER BY w.id';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAll();
+    }
+
+//    public function findWorksLikes(int $userId): ?array
 //    {
-//        return $this->createQueryBuilder('w')
-//            ->andWhere('w.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT w, l
+//            FROM App\Entity\Likes l
+//            INNER JOIN l.user u
+//            INNER JOIN l.work w
+//            WHERE u.id = :id'
+//        )->setParameter('id', $userId);
+//
+////        return $query->getResult();
+//        return $query->getArrayResult();
 //    }
 }
