@@ -31,6 +31,9 @@ class Work
     #[ORM\Column(options: ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTimeImmutable $update_at = null;
 
+    #[ORM\Column(options: ["default" => "json_object()"])]
+    private array $image = [];
+
     public function __construct()
     {
         $this->create_at = new \DateTimeImmutable();
@@ -117,6 +120,18 @@ class Work
     public function setUpdateAt(\DateTimeImmutable $update_at): self
     {
         $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    public function getImage(): array
+    {
+        return $this->image;
+    }
+
+    public function setImage(array $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

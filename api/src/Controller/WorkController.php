@@ -14,6 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class WorkController extends AbstractController
 {
+    #[Route('/works')]
+    public function getWorks(WorkRepository $workRepository): ?Response
+    {
+        $works = $workRepository->findWorksLikes($this->getUser()->getId());
+        return new JsonResponse($works);
+    }
+
     public function addWork(): ?Response
     {
         return new Response('added work');
@@ -27,12 +34,5 @@ class WorkController extends AbstractController
     public function updateWork(): ?Response
     {
         return new Response('update work');
-    }
-
-    #[Route('/works')]
-    public function getWorks(WorkRepository $workRepository): ?Response
-    {
-        $works = $workRepository->findWorksLikes($this->getUser()->getId());
-        return new JsonResponse($works);
     }
 }
