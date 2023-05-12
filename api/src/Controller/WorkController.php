@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Likes;
 use App\Entity\User;
+use App\Entity\Work;
 use App\Repository\LikesRepository;
 use App\Repository\WorkRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class WorkController extends AbstractController
 {
     #[Route('/works')]
-    public function getWorks(WorkRepository $workRepository): ?Response
+    public function getWorks(WorkRepository $workRepository, LikesRepository $likesRepository): ?Response
     {
-        $works = $workRepository->findWorksLikes($this->getUser()->getId());
+        $works = $workRepository->findWorksLikes(1);
         return new JsonResponse($works);
     }
 

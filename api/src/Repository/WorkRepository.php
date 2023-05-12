@@ -43,32 +43,30 @@ class WorkRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = '
-            SELECT w.*, l.likes_bool FROM work AS w
-            INNER JOIN likes l on w.id = l.work_id
-            INNER JOIN user u on l.user_id = u.id
-            WHERE u.id = :user_id ORDER BY w.id';
+        $sql = 'SELECT id, name, description, image FROM work';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+        $works = $resultSet->fetchAll();
 
+        $sql = 'SELECT * FROM likes WHERE user_id = :user_id';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['user_id' => $userId]);
+        $likes = $resultSet->fetchAll();
 
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAll();
+        foreach ($works as $key => $work) {
+            foreach ($likes as $like) {
+                if ($work['id'] === $like['work_id']) {
+                    $works[$key]['likes_bool'] = $like['likes_bool'];
+                    unset($works[$key]['id']);
+                }
+            }
+        }
+        foreach ($works as $key => $work) {
+            if (!isset($work['likes_bool'])) {
+                $works[$key]['likes_bool'] = 0;
+            }
+        }
+
+        return $works;
     }
-
-//    public function findWorksLikes(int $userId): ?array
-//    {
-//        $entityManager = $this->getEntityManager();
-//
-//        $query = $entityManager->createQuery(
-//            'SELECT w, l
-//            FROM App\Entity\Likes l
-//            INNER JOIN l.user u
-//            INNER JOIN l.work w
-//            WHERE u.id = :id'
-//        )->setParameter('id', $userId);
-//
-////        return $query->getResult();
-//        return $query->getArrayResult();
-//    }
 }
