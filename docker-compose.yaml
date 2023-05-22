@@ -9,7 +9,7 @@ services:
     volumes:
       - ./api:/var/www/api
     ports:
-      - 80:8000
+      - "80:8000"
     restart: always
     container_name: marina_api_dev
     entrypoint: ['/bin/sh', '/install.sh']
@@ -24,15 +24,23 @@ services:
     volumes:
       - ./app:/var/www/app
     ports:
-      - 7777:8080
+      - "7777:8080"
     restart: always
     container_name: marina_app_dev
     entrypoint: ['/bin/sh', '/install.sh']
 
-#  admin:
-#    build:
-#      context: ./
-#      dockerfile: ./docker/admin/dev/Dockerfile
+  admin:
+    build:
+      context: ./
+      dockerfile: ./docker/admin/dev/Dockerfile
+    image: image_marina_admin_dev
+    volumes:
+      - ./admin:/var/www/admin
+    ports:
+      - "7778:8080"
+    restart: always
+    container_name: marina_admin_dev
+    entrypoint: ['/bin/sh', '/install.sh']
 
   db:
     build:
@@ -41,7 +49,7 @@ services:
     image: image_marina_db_dev
     restart: always
     ports:
-      - 1117:3306
+      - "1117:3306"
     volumes:
       - mysql:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
