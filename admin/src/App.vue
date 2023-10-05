@@ -1,10 +1,27 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <component :is="layout">
+  </component>
 </template>
+
+<script>
+import MainLayout from "@/layouts/MainLayout.vue";
+import LoginLayout from "@/layouts/LoginLayout.vue";
+export default {
+  components: {
+    MainLayout,
+    LoginLayout
+  },
+  mounted() {
+  },
+  computed: {
+    layout() {
+      return (this.$route.meta.layout === 'login') ? 'login-layout' : 'main-layout';
+    }
+  },
+  methods: {
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
