@@ -90,9 +90,19 @@ export default {
 		changeMenuMobileSize() {
 			this.button = !this.button;
 			let navMobile = document.querySelector('#nav-mobile');
+			let menuItem = navMobile.querySelectorAll('.menu-item');
+			for (let item of menuItem) {
+				item.style.opacity = 0;
+			}
 			if (navMobile.style.width === '' || navMobile.style.width === '50px') {
 				navMobile.style.height = '96%';
 				navMobile.style.width = '210px';
+				setTimeout(function() { // Задержка для появления opacity так как с display: none они перехлестываются
+					for (let item of menuItem) { // и накладываются друг на друга и transition не работает. Поэтому нужна
+						item.style.opacity = 1; // нужна задержка для opacity
+					}
+				}, 20);
+
 				return
 			}
 			navMobile.style.height = '50px';
@@ -235,15 +245,14 @@ $bgc-active-color: #5c5c5c;
 			margin-top: auto;
 			background-color: transparent;
 			border: none;
-		}
+					}
 	}
 	.menu-mobile-item-show {
 		display: block;
-		transition: all .3s;
+		transition: opacity 1s;
 	}
 	.menu-mobile-item-hidden {
 		display: none;
-		transition: all .3s;
 	}
 	.menu-mobile-text {
 		left: 50px;
