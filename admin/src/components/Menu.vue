@@ -245,7 +245,7 @@ $bgc-active-color: #5c5c5c;
 			margin-top: auto;
 			background-color: transparent;
 			border: none;
-					}
+		}
 	}
 	.menu-mobile-item-show {
 		display: block;
