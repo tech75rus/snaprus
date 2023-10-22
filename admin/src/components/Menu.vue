@@ -120,14 +120,14 @@ export default {
 // основные цвета
 $main-color: #6a6a6a;
 $mobile-color: #6a6a6aef;
-$main-hover: #5c5c5c;
+$main-hover: #4d4d4d;
 $yellow: #e9e043;
 $orange: #ee8760;
 $color-text: #d8dbdf;
 
 // дополнительные цвета
 $bgc-mobile-color: #860dd2ef;
-$bgc-active-color: #5c5c5c;
+$bgc-active-color: #4d4d4d;
 
 #main {
 	min-height: 100vh;
