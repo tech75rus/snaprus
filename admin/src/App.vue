@@ -30,6 +30,10 @@ export default {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent; // перестает мигать кнопка синим цветом и ссылки а может еще что:)
 }
+*::selection {
+  color: #e9e043;
+  background-color: #6a6a6a;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

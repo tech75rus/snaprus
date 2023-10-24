@@ -152,6 +152,7 @@ $bgc-active-color: #4d4d4d;
 	border-radius: 5px;
 	scrollbar-width: none;
 	z-index: 100;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	img {
 		width: 25px;
 	}
@@ -236,6 +237,7 @@ $bgc-active-color: #4d4d4d;
 		border-radius: 5px;
 		transition: height .3s, width .3s;
 		z-index: 100;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 		img {
 			width: 25px;
 		}
