@@ -297,7 +297,7 @@ $bgc-active-color: #4d4d4d;
 		left: 50px;
 	}
 	.router-link-exact-active {
-		background-color: $main-color;
+		background-color: $bgc-active-color;
 		span{
 			color: $yellow;
 		}
