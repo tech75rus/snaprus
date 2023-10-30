@@ -25,10 +25,12 @@
 				</svg>
 				<span class="menu-mobile-text">Теги</span>
 			</router-link>
-			<button @click="changeMenuMobileSize">
-				<img src="../assets/icons/right-arrow.png" alt="" v-show="!button">
-				<img src="../assets/icons/left-arrow.png" alt="" v-show="button">
+			<button @click="changeMenuMobileSize" class="menu-button-mobile">
+				<span class="line-1"></span>
+				<span class="line-2"></span>
+				<span class="line-3"></span>
 			</button>
+			<span class="menu-button-text-mobile">menu</span>
 		</div>
 		<div id="nav">
 			<router-link to="/" class="menu-item">
@@ -81,8 +83,8 @@ export default {
 			this.button = !this.button;
 			let nav = document.querySelector('#nav');
 			let navClear = document.querySelector('#nav-clear');
-			let menu = document.querySelector('.menu-button');
-			menu.classList.toggle('menu-button-hidden');
+			let menuButton = document.querySelector('.menu-button');
+			menuButton.classList.toggle('menu-button-hidden');
 			if (nav.style.width === '' || nav.style.width === '70px') {
 				nav.style.width = '210px';
 				navClear.style.width = '230px';
@@ -95,25 +97,28 @@ export default {
 			this.button = !this.button;
 			let navMobile = document.querySelector('#nav-mobile');
 			let menuItem = navMobile.querySelectorAll('.menu-item');
+			let menuButtonMobile = navMobile.querySelector('.menu-button-mobile');
+			let menuButtonTextMobile = navMobile.querySelector('.menu-button-text-mobile');
+			menuButtonMobile.classList.toggle('menu-button-mobile-hidden');
 			for (let item of menuItem) {
 				item.style.opacity = 0;
 			}
 			if (navMobile.style.width === '' || navMobile.style.width === '50px') {
 				navMobile.style.height = '96%';
 				navMobile.style.width = '210px';
+				menuButtonTextMobile.style.display = 'none';
 				setTimeout(function() { // Задержка для появления opacity так как с display: none они перехлестываются
 					for (let item of menuItem) { // и накладываются друг на друга и transition не работает. Поэтому нужна
 						item.style.opacity = 1; // нужна задержка для opacity
 					}
 				}, 20);
-
 				return
 			}
+			menuButtonTextMobile.style.display = 'block';
 			navMobile.style.height = '50px';
 			navMobile.style.width = '50px';
 		},
 	}
-
 }
 </script>
 
@@ -237,12 +242,49 @@ $bgc-active-color: #4d4d4d;
 			width: 25px;
 		}
 		button {
-			width: 100%;
-			padding-bottom: 8px;
-			margin-top: auto;
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			bottom: 16px;
+			left: 10px;
+			width: 30px;
+			height: 24px;
 			background-color: transparent;
 			border: none;
+			span {
+				width: 100%;
+				height: 2px;
+				background-color: #000;
+				transition: all .2s;
+			}
+
+			.line-1 {
+				transform-origin: 0px 2px;
+			}
+			.line-3 {
+				transform-origin: 8px 3px;
+			}
+
 		}
+		.menu-button-text-mobile {
+			position: absolute;
+			bottom: 2px;
+			left: 9px;
+			font-size: 0.8rem;
+		}
+		.menu-button-mobile-hidden {
+			.line-1 {
+				transform: rotate(45deg);
+			}
+			.line-2 {
+				transform: scale(0);
+			}
+			.line-3 {
+				transform: rotate(-45deg);
+			}
+		}
+
 	}
 	.menu-mobile-item-show {
 		display: block;
@@ -306,5 +348,4 @@ $bgc-active-color: #4d4d4d;
     transform: rotate(-45deg);
   }
 }
-
 </style>
