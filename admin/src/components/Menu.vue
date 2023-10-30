@@ -55,10 +55,12 @@
 				</svg>
 				<span :class="[button ? 'menu-text-show' : 'menu-text-hidden']">Теги</span>
 			</router-link>
-			<button @click="changeSizeMenu">
-				<img src="../assets/icons/right-arrow.png" alt="" v-show="!button">
-				<img src="../assets/icons/left-arrow.png" alt="" v-show="button">
+			<button @click="changeSizeMenu" class="menu-button">
+				<span class="line-1"></span>
+				<span class="line-2"></span>
+				<span class="line-3"></span>
 			</button>
+			<span class="menu-button-text">menu</span>
 		</div>
 		<div id="nav-clear"></div>
     <router-view/>
@@ -79,6 +81,8 @@ export default {
 			this.button = !this.button;
 			let nav = document.querySelector('#nav');
 			let navClear = document.querySelector('#nav-clear');
+			let menu = document.querySelector('.menu-button');
+			menu.classList.toggle('menu-button-hidden');
 			if (nav.style.width === '' || nav.style.width === '70px') {
 				nav.style.width = '210px';
 				navClear.style.width = '230px';
@@ -108,25 +112,16 @@ export default {
 			navMobile.style.height = '50px';
 			navMobile.style.width = '50px';
 		},
-		isActive(input) {
-			return this.$route.path === input;
-		}
 	}
 
 }
 </script>
 
 <style lang="scss" scoped>
-// основные цвета
 $main-color: #6a6a6a;
 $mobile-color: #6a6a6aef;
 $main-hover: #4d4d4d;
 $yellow: #e9e043;
-$orange: #ee8760;
-$color-text: #d8dbdf;
-
-// дополнительные цвета
-$bgc-mobile-color: #860dd2ef;
 $bgc-active-color: #4d4d4d;
 
 #main {
@@ -265,6 +260,51 @@ $bgc-active-color: #4d4d4d;
 			color: $yellow;
 		}
 	}
+}
+
+.menu-button {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  bottom: 15px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+
+  span {
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    border-radius: 10px;
+    transition: all .2s;
+  }
+  .line-1 {
+    transform-origin: 2px 2px;
+  }
+  .line-3 {
+    transform-origin: 9px 3px;
+  }
+}
+.menu-button-text {
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  font-size: .75rem;
+}
+.menu-button-hidden ~ .menu-button-text {
+  display: none;
+}
+.menu-button-hidden {
+  .line-1 {
+    transform: rotate(45deg);
+  }
+  .line-2 {
+    transform: scale(0);
+  }
+  .line-3 {
+    transform: rotate(-45deg);
+  }
 }
 
 </style>
