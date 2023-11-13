@@ -1,54 +1,246 @@
 <template>
   <h1>Проекты</h1>
   <div class="home">
-    <div class="project">
+    <router-link :to="'/project/1'" class="project">
       <div class="img">
         <img src="http://localhost/images/1.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/2'" class="project">
       <div class="img">
         <img src="http://localhost/images/2.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/3'" class="project">
       <div class="img">
         <img src="http://localhost/images/3.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/4'" class="project">
       <div class="img">
         <img src="http://localhost/images/4.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/5'" class="project">
       <div class="img">
         <img src="http://localhost/images/5.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/6'" class="project">
       <div class="img">
         <img src="http://localhost/images/6.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/7'" class="project">
       <div class="img">
         <img src="http://localhost/images/7.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
-    <div class="project">
+    </router-link>
+    <router-link :to="'/project/8'" class="project">
       <div class="img">
         <img src="http://localhost/images/8.jpg" alt="">
       </div>
       <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </div>
+    </router-link>
+    <router-link :to="'/project/1'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/1.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/2'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/2.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/3'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/3.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/4'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/4.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/5'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/5.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/6'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/6.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/7'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/7.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/8'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/8.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/1'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/1.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/2'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/2.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/3'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/3.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/4'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/4.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/5'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/5.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/6'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/6.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/7'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/7.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/8'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/8.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/1'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/1.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/2'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/2.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/3'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/3.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/4'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/4.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/5'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/5.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/6'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/6.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/7'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/7.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/8'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/8.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/1'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/1.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/2'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/2.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/3'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/3.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/4'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/4.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/5'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/5.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/6'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/6.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/7'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/7.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
+    <router-link :to="'/project/8'" class="project">
+      <div class="img">
+        <img src="http://localhost/images/8.jpg" alt="">
+      </div>
+      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+    </router-link>
   </div>
 </template>
 
@@ -78,6 +270,8 @@ h1 {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: box-shadow .3s;
   background-color: #6a6a6a;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
   .img {
     height: 180px;
