@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 import ProjectView from '../views/ProjectView.vue';
+import AddProjectView from '../views/AddProjectView.vue';
 import PageNotFound from "@/components/PageNotFound.vue";
 
 const routes = [
@@ -19,6 +20,14 @@ const routes = [
       layout: 'main'
     },
     component: ProjectView
+  },
+  {
+    path: '/add-project',
+    name: 'addProject',
+    meta: {
+      layout: 'main'
+    },
+    component: AddProjectView
   },
   {
     path: '/login',
