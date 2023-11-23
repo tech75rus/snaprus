@@ -66,6 +66,9 @@ export default {
     &:focus {
       box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     }
+    &:focus::placeholder {
+      color: transparent;
+    }
   }
   input[type="submit"] {
     text-align: center;
@@ -78,6 +81,9 @@ export default {
   textarea {
     text-align: left;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    &:focus::placeholder {
+      color: transparent;
+    }
   }
   .loader {
     cursor: pointer;
@@ -154,7 +160,7 @@ export default {
     }
   }
   .submit-project {
-    height: 50px;
+    height: 30px;
   }
 }
 
