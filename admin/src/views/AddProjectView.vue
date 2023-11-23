@@ -93,6 +93,7 @@ export default {
       justify-content: center;
       //background-color: #717171;
       svg {
+        pointer-events: none;
         position: absolute;
         width: 100px;
         margin: auto;
