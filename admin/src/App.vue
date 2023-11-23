@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "src/assets/scss/color";
+
 * {
   padding: 0;
   margin: 0;
@@ -32,7 +34,17 @@ export default {
 }
 *::selection {
   color: #e9e043;
-  background-color: #6a6a6a;
+//  background-color: #6a6a6a;
+  background-color: #656226;
+}
+::placeholder {
+   color: $text-placeholder;
+}
+input {
+  all: unset;
+}
+textarea {
+  all: unset;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
