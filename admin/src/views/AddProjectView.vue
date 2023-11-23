@@ -51,25 +51,33 @@ export default {
 
 .add-project {
   display: flex;
+  max-width: 1020px;
+  margin: 0 auto;
   flex-direction: column;
   row-gap: 20px;
   text-align: center;
   padding: 10px;
   input {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 10px;
     text-align: left;
     border-radius: 5px;
     background-color: $additional;
+    &:focus {
+      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
   }
   input[type="submit"] {
     text-align: center;
     cursor: pointer;
     &:hover {
+      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
       color: $active-text;
     }
   }
   textarea {
     text-align: left;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   .loader {
     cursor: pointer;
@@ -115,6 +123,10 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      }
       svg {
         width: 150px;
         fill: $icon-main;
@@ -136,6 +148,9 @@ export default {
     border-radius: 5px;
     resize: vertical;
     padding: 10px;
+    &:focus {
+      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
   }
   .submit-project {
     height: 50px;
