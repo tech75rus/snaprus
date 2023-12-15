@@ -32,16 +32,15 @@ class ProjectController extends AbstractController
         $descriptionProject = $request->request->get('description-project');
         /** @var UploadedFile $imageProject */
         $imageProject = $request->files->get('image-project');
-        $this->sizeFile = $imageProject->getSize();
-        $this->maxSizeFile = $imageProject->getMaxFilesize();
+
         $error = [];
         empty($nameProject) ? array_push($error, 'Нет имени проекта') : null;
         empty($imageProject) ? array_push($error, 'Нет изображения'): null;
-        ($this->sizeFile > $this->maxSizeFile) ? array_push($error, 'Изображение слишком тяжелое'): null;
+        // Если файл больше черем разрешен в php.ini тогда результат 0 если нет тогда показывается размер файла в байтах
+        !filesize($imageProject) ? array_push($error, 'Изображение слишком большого размера. Максимально допустимо ' . ini_get('upload_max_filesize')): null;
         if ($error) {
             return new JsonResponse($error, 500);
         }
-        return new JsonResponse($this->sizeFile);
 
         // запись изображения на диск
             // разбить по качеству изображение
