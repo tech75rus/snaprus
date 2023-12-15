@@ -26,6 +26,7 @@ RUN apk add --no-cache bash \
 RUN adduser -D -u 1000 gladkix
 
 COPY ./docker/api/dev/install.sh /install.sh
+COPY ./docker/api/dev/php.ini /usr/local/etc/php/php.ini
 RUN chown gladkix:gladkix /install.sh
 
 USER gladkix
