@@ -36,6 +36,9 @@ class ProjectController extends AbstractController
         $error = [];
         empty($nameProject) ? array_push($error, 'Нет имени проекта') : null;
         empty($imageProject) ? array_push($error, 'Нет изображения'): null;
+        if (!in_array($imageProject->getClientOriginalExtension(), ['JPG', 'JPEG', 'PNG', 'WEBP'])) {
+            array_push($error, 'Не верный формат. Формат должен быть jpg, png или webp');
+        }
         // Если файл больше черем разрешен в php.ini тогда результат 0 если нет тогда показывается размер файла в байтах
         !filesize($imageProject) ? array_push($error, 'Изображение слишком большого размера. Максимально допустимо ' . ini_get('upload_max_filesize')): null;
         if ($error) {
