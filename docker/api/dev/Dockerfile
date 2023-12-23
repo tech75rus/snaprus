@@ -4,6 +4,8 @@ RUN apk update && apk add  --no-cache composer \
     curl \
     freetype-dev \
     libjpeg-turbo-dev \
+    jpeg-dev \
+    libwebp-dev \
     libpng-dev \
     zlib-dev \
     libzip-dev \
@@ -17,7 +19,14 @@ RUN apk update && apk add  --no-cache composer \
     php-mbstring \
     php-json \
     php-opcache \
-    && docker-php-ext-install gd opcache bcmath zip pdo pdo_mysql
+    && docker-php-ext-configure gd --with-jpeg --with-webp \
+    && docker-php-ext-install -j$(nproc) gd opcache bcmath zip pdo pdo_mysql
+
+# RUN apk add jpeg-dev libpng-dev \
+#     && docker-php-ext-configure gd --with-jpeg \
+#     && docker-php-ext-install -j$(nproc) gd
+
+#    --with-freetype
 
 RUN apk add --no-cache bash \
     && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
