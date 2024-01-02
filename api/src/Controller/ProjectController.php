@@ -65,6 +65,6 @@ class ProjectController extends AbstractController
     // #[Route('/about')]
     // public function aboutInfo(): void
     // {
-    //     phpinfo(INFO_MODULES);
+    //     phpinfo();
     // }
 }

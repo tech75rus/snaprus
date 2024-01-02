@@ -1,6 +1,9 @@
-FROM php:fpm-alpine
+FROM php:8.3-fpm-alpine
 
-RUN apk update && apk add  --no-cache composer \
+RUN apk update && apk add --no-cache \ 
+    $PHPIZE_DEPS \
+    imagemagick-dev \
+    composer \
     curl \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -19,14 +22,9 @@ RUN apk update && apk add  --no-cache composer \
     php-mbstring \
     php-json \
     php-opcache \
-    && docker-php-ext-configure gd --with-jpeg --with-webp \
-    && docker-php-ext-install -j$(nproc) gd opcache bcmath zip pdo pdo_mysql
-
-# RUN apk add jpeg-dev libpng-dev \
-#     && docker-php-ext-configure gd --with-jpeg \
-#     && docker-php-ext-install -j$(nproc) gd
-
-#    --with-freetype
+    && docker-php-ext-install -j$(nproc) opcache bcmath zip pdo pdo_mysql \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
 
 RUN apk add --no-cache bash \
     && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \

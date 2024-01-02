@@ -20,13 +20,13 @@ class LoadImage {
         $image->move($this->directory, $image->getClientOriginalName());
         switch ($image->getClientOriginalExtension()) {
             case 'jpeg' || 'jpg' || 'JPG' || 'JPEG':
-                $gd = imagecreatefromjpeg($this->directory . '/' . $image->getClientOriginalName());
-                $big = $this->directory . '/' . pathinfo($image->getClientOriginalName(), \PATHINFO_FILENAME) . '-big' . '.webp';
-                $middle = $this->directory . '/' . pathinfo($image->getClientOriginalName(), \PATHINFO_FILENAME) . '.webp';
-                $small = $this->directory . '/' . pathinfo($image->getClientOriginalName(), \PATHINFO_FILENAME) . '.webp';
-                imagescale($gd, 600, 600);
-                imagewebp($gd, $big);
-                imagedestroy($gd);
+                $imagick = new \Imagick($this->directory . '/' . $image->getClientOriginalName());
+                // $imagick->enhanceImage();
+                // $imagick->cropThumbnailImage(500, 500, true);
+                $imagick->setImageFormat('WEBP');
+                // $imagick->thumbnailImage(500, 200, true);
+                $imagick->setImageCompressionQuality(80);
+                $imagick->writeImage($this->directory . '/' . pathinfo($image->getClientOriginalName(), \PATHINFO_FILENAME) . '.webp');
                 break;
             case 'png' || 'PNG':
                 $gd = imagecreatefrompng($this->directory . '/' . $image->getClientOriginalName());
