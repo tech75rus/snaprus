@@ -47,8 +47,8 @@ class ProjectController extends AbstractController
             // разбить по качеству изображение
         $directory = $this->getParameter('images_derictory');
         $image = new LoadImage($directory);
-        $image->setImage($imageProject);
-        return new JsonResponse('OK');
+        $arrayPathImages = $image->setImage($imageProject);
+        return new JsonResponse($arrayPathImages);
 
 
         // запись данных в БД
