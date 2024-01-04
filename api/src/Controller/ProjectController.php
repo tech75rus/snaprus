@@ -43,19 +43,18 @@ class ProjectController extends AbstractController
             return new JsonResponse($error, 500);
         }
 
-        // запись изображения на диск
-            // разбить по качеству изображение
         $directory = $this->getParameter('images_derictory');
         $image = new LoadImage($directory);
         $arrayPathImages = $image->setImage($imageProject);
-        return new JsonResponse($arrayPathImages);
-
 
         // запись данных в БД
         $project = new Project();
         $project->setName($nameProject);
         $project->setDescription(!empty($descriptionProject) ? $descriptionProject : '');
-        $project->setImage($imageProject->getClientOriginalName());
+        $project->setImageOrigin($arrayPathImages['origin']);
+        $project->setBigImage($arrayPathImages['big']);
+        $project->setMiddleImage($arrayPathImages['middle']);
+        $project->setSmallImage($arrayPathImages['small']);
         $entityManager->persist($project);
         $entityManager->flush();
 
