@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Repository\LikesRepository;
+use App\Repository\ProjectRepository;
 use App\Service\LoadImage;
 use Doctrine\DBAL\Exception;
 use Doctrine\Migrations\Configuration\Migration\JsonFile;
@@ -18,9 +20,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     #[Route('/project/{id}', name: 'get_project')]
-    public function getProject(int $id): Response
+    public function getProject(int $id, ProjectRepository $projectRepository): Response
     {
-        return new Response($id);
+        $project = $projectRepository->find($id);
+        return $this->json($project);
+    }
+
+    #[Route('/projects', name: 'get_project')]
+    public function getProjects(ProjectRepository $projectRepository): Response
+    {
+        $projects = $projectRepository->findAll();
+        return $this->json($projects);
     }
 
     #[Route('/add-project', name: 'add_project', methods: ["POST"])]
