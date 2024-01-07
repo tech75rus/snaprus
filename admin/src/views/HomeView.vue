@@ -8,62 +8,38 @@
       </div>
       <span>Добавить проект</span>
     </router-link>
-    <router-link :to="'/project/1'" class="project">
+    <router-link :to="'/project/' + project.id" class="project" v-for="project in projects">
       <div class="img">
-        <img src="http://localhost/images/1.jpg" alt="">
+        <img :src="'http://localhost' + project.smallImage" alt="">
       </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/2'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/2.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/3'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/3.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/4'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/4.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/5'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/5.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/6'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/6.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/7'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/7.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
-    </router-link>
-    <router-link :to="'/project/8'" class="project">
-      <div class="img">
-        <img src="http://localhost/images/8.jpg" alt="">
-      </div>
-      <h3>Project Lorem ipsum dolor sit amet consectetur adipisicing.</h3>
+      <h3>{{ project.name }}</h3>
     </router-link>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'HomeView',
   components: {
+  },
+  data() {
+    return {
+      projects: [],
+    }
+  },
+  created() {
+  }, 
+  async mounted() {
+    await axios.get('http://localhost/projects').then(response => {
+      this.projects = response.data;
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    })
   }
+
 }
 </script>
 

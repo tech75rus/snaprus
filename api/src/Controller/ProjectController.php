@@ -26,7 +26,7 @@ class ProjectController extends AbstractController
         return $this->json($project);
     }
 
-    #[Route('/projects', name: 'get_project')]
+    #[Route('/projects', name: 'get_projects')]
     public function getProjects(ProjectRepository $projectRepository): Response
     {
         $projects = $projectRepository->findAll();
