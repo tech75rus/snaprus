@@ -62,21 +62,39 @@
 
 .gallery {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 .gallery-1 {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 .gallery-2 {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 .gallery-3 {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 .gallery-4 {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 .gallery-5 {
   @include gallery-small;
+  >div {
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 850px) and (min-width: 601px){

@@ -1,6 +1,6 @@
 <template>
   <div class="work">
-    <img src="http://localhost/images/1.jpg" alt="">
+    <img :src="'http://localhost' + data.bigImage" alt="">
     <div class="icon">
       <div class="icon-comment">
         <svg width="22" height="15" viewBox="0 0 22 15" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="description">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus ad atque culpa cumque deserunt dignissimos distinctio, ea eaque est et fuga incidunt iusto labore laudantium magnam magni nostrum perspiciatis praesentium quasi reiciendis tempora, ullam unde velit voluptate. Distinctio inventore ipsa ipsam labore modi non, omnis placeat porro quisquam repudiandae?</p>
+      <p>{{ data.description }}</p>
     </div>
     <div class="comment">
       <h2>Комментарии</h2>
@@ -55,14 +55,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'WorkView',
   data() {
     return {
+      data: '',
     }
   },
   components: {
-  }
+  },
+  mounted() {
+    console.log(this.$route.params.id);
+    axios.get('http://localhost/project/' + this.$route.params.id).then(response => {
+      console.log(response.data);
+      this.data = response.data;
+    })
+  },
 }
 </script>
 

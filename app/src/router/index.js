@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from "@/views/HomeView.vue";
-import WorkView from "@/views/WorkView.vue";
+import Project from "@/views/ProjectView.vue"
 
 const routes = [
   {
@@ -9,11 +9,11 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/work/:id',
-    name: 'work',
-    component: WorkView,
+    path: '/project/:id',
+    name: 'project',
+    component: Project,
     meta: {
-      title: 'Work'
+      title: 'Project'
     }
   },
 ]
