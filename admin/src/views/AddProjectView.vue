@@ -19,8 +19,8 @@
 </template>
 
 <script>
+import router from "@/router";
 import axios from "axios";
-import { nextTick } from "vue";
 
 export default {
   name: 'AddProjectView',
@@ -64,16 +64,21 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        console.log(response.data);
+        router.push({path: '/'});
       }).catch(error => {
         console.log(error);
       });
     }
   },
-  // beforeRouteLeave(to, from, next) {
-  //   console.log('Ушел со страницы');
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    let inputLoader = document.querySelector('.project-loader');
+    let projectImage = document.querySelector('.project_image_image');
+    let image = document.querySelector('.project_image');
+    image.style.display = 'none';
+    projectImage.style.display = 'none';
+    inputLoader.style.display = 'flex';
+    next();
+  },
   // beforeRouteEnter() {
   //   console.log('Пришел на страницу');
   // },
