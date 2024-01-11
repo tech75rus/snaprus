@@ -3,7 +3,7 @@
     <div class="menu">
       <div class="center">
         <div class="logo">
-          <p>Marina Design</p>
+          <router-link to="/" style="text-decoration: none; color: #2c3e50;">Marina Design</router-link>
         </div>
         <div class="user">
           <p>User</p>
