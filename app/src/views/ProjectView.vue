@@ -8,7 +8,7 @@
         </svg>
         <span>5</span>
       </div>
-      <div class="icon-download">
+      <div @click="originImage(data.imageOrigin)" class="icon-download">
         <svg width="20" height="18" viewBox="0 0 20 18" fill="black" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53711 0.864441C10.0894 0.864441 10.5371 1.31216 10.5371 1.86444V9.40371L13.7673 6.17349C14.1579 5.78297 14.791 5.78297 15.1815 6.17349C15.5721 6.56401 15.5721 7.19718 15.1815 7.5877L10.2124 12.5569C10.0593 12.7099 9.86899 12.803 9.67062 12.8361C9.61589 12.8452 9.56055 12.8498 9.50521 12.8498C9.24929 12.8498 8.99337 12.7521 8.79811 12.5569L3.82893 7.5877C3.4384 7.19718 3.4384 6.56401 3.82893 6.17349C4.21945 5.78297 4.85262 5.78297 5.24314 6.17349L8.53711 9.46746V1.86444C8.53711 1.31216 8.98482 0.864441 9.53711 0.864441ZM2.11273 5.42475C2.11273 4.87247 1.66502 4.42475 1.11273 4.42475C0.560447 4.42475 0.112732 4.87247 0.112732 5.42475V16.1915V16.1916V16.1916C0.112732 16.7439 0.560447 17.1916 1.11273 17.1916H17.8977C17.9297 17.1916 17.9613 17.1901 17.9925 17.1872C18.0235 17.1901 18.055 17.1915 18.0868 17.1915C18.639 17.1915 19.0868 16.7438 19.0868 16.1915V5.42476C19.0868 4.87247 18.639 4.42476 18.0868 4.42476C17.5345 4.42476 17.0868 4.87247 17.0868 5.42476V15.1916H2.11273V5.42475Z"/>
         </svg>
@@ -66,10 +66,13 @@ export default {
   },
   components: {
   },
+  methods: {
+    originImage(url) {
+      window.open('http://localhost' + this.data.imageOrigin);
+    }
+  },
   mounted() {
-    console.log(this.$route.params.id);
     axios.get('http://localhost/project/' + this.$route.params.id).then(response => {
-      console.log(response.data);
       this.data = response.data;
     })
   },
@@ -84,6 +87,7 @@ export default {
     justify-content: space-between;
     margin: 10px 10px 0 10px;
     .icon-download {
+      cursor: pointer;
       &>svg {
         width: 25px;
         height: 25px;
