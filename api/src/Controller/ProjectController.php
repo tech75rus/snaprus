@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Repository\LikesRepository;
 use App\Repository\ProjectRepository;
 use App\Service\LoadImage;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProjectController extends AbstractController
 {
@@ -30,7 +32,13 @@ class ProjectController extends AbstractController
     public function getProjects(ProjectRepository $projectRepository): Response
     {
         $projects = $projectRepository->findAll();
-        return $this->json($projects);
+        if ($user = $this->getUser()) {
+            /** @var User $user */
+            $token = $user->getToken();
+        }
+        return $this->json($projects, 200, [
+            'token' => $token ?? ''
+        ]);
     }
 
     #[Route('/add-project', name: 'add_project', methods: ["POST"])]

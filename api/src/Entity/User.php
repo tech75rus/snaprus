@@ -33,6 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class)]
     private Collection $likes;
 
+    #[ORM\Column(length: 70, nullable: true)]
+    private ?string $token = null;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -72,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_GUEST';
 
         return array_unique($roles);
     }
@@ -134,6 +137,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $like->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): static
+    {
+        $this->token = $token;
 
         return $this;
     }
