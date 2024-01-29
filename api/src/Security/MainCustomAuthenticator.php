@@ -31,16 +31,19 @@ class MainCustomAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
+        if ($request->getPathInfo() === '/api/registration-user') {
+            return false;
+        }
         return true;
     }
 
     public function authenticate(Request $request): Passport
     {
-        if (!$request->request->has('token')) {
+        if (!$request->headers->has('token')) {
             $this->newGuest();
         } else {
-            $token = $request->request->get('token');
-            $user = $this->userRepository->findOneBy(['token' => $token]);
+            $this->token = $request->headers->get('token');
+            $user = $this->userRepository->findOneBy(['token' => $this->token]);
             if ($user === null) {
                 $this->newGuest();
             }

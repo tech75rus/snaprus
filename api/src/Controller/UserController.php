@@ -15,33 +15,40 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'app_user')]
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
     #[Route('/api/registration-user', name: 'registration-user', methods: ['POST'])]
     public function registerUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hashPassword): ?Response
     {
         if (!$request->request->has('name') && !$request->request->has('password')) {
             return new Response('Введите имя и пароль', 401);
         }
+        if ($request->headers->has('token')) {
+            $user = $entityManager->getRepository(User::class)->findOneBy(['token' => $request->headers->get('token')]);
+            if ($user) {
+                $token = $this->newRegisterUser($request, $entityManager, $hashPassword, $user);
+                return new Response('Пользователь зарегистрирован', 200, [
+                    'token' => $token
+                ]);        
+            }
+        }
+        $token = $this->newRegisterUser($request, $entityManager, $hashPassword);
+        return new Response('Пользователь зарегистрирован', 200, [
+            'token' => $token
+        ]);
+    }
+
+    private function newRegisterUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hashPassword, User $user = null): string
+    {
         $name = $request->request->get('name');
         $password = $request->request->get('password');
         $random = new \Random\Randomizer();
         $token = md5(time()) . $random->getBytesFromString('abcdef0123456789', 36);
-        $user = new User();
+        $user ?? $user = new User();
         $user->setUsername($name);
         $user->setPassword($hashPassword->hashPassword($user, $password));
         $user->setToken($token);
         $user->setRoles(['ROLE_USER']);
         $entityManager->persist($user);
         $entityManager->flush();
-        return new Response('Пользователь зарегистрирован', 200, [
-            'token' => $token
-        ]);
+        return $token;
     }
 }
