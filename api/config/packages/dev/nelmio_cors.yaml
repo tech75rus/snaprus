@@ -9,7 +9,7 @@ nelmio_cors:
         max_age: 3600
         allow_credentials: false
         allow_origin: ['*']
-        allow_headers: ['Accept', 'Accept-Encoding', 'Accept-Language', 'Connection', 'Content-Length', 'Content-Type', 'Host', 'Origin', 'Referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'Sec-Fetch-Dest', 'Sec-Fetch-Mode', 'Sec-Fetch-Site', 'User-Agent']
+        allow_headers: ['Accept', 'Accept-Encoding', 'Accept-Language', 'Connection', 'Content-Length', 'Content-Type', 'Host', 'Origin', 'Referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'Sec-Fetch-Dest', 'Sec-Fetch-Mode', 'Sec-Fetch-Site', 'User-Agent', 'token']
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
         expose_headers: ['*']
     paths:

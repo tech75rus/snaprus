@@ -30,11 +30,18 @@ class UserController extends AbstractController
                 ]);        
             }
         }
+
+        // TODO сделать проверку на существование зарегистрированого пользлвателя
+
         $token = $this->newRegisterUser($request, $entityManager, $hashPassword);
         return new Response('Пользователь зарегистрирован', 200, [
             'token' => $token
         ]);
     }
+
+
+
+
 
     private function newRegisterUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hashPassword, User $user = null): string
     {
