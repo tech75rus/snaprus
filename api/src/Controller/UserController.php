@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Likes;
 use App\Entity\User;
-use App\Repository\LikesRepository;
-use App\Repository\WorkRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +37,27 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/api/authentication', name: 'authentication', methods: ['POST'])]
+    public function authenticationUser(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $hashPassword): ?Response
+    {
+        if (!$request->request->has('name') && !$request->request->has('password')) {
+            return new Response('Введите имя и пароль', 401);
+        }
+
+        /** @var User $user */
+        if (!$user = $userRepository->findOneBy(['username' => $request->request->get('name')])) {
+            return new Response('Не верный логин или пароль', 401);
+        }
+        if (!$hashPassword->isPasswordValid($user, $request->request->get('password'))) {
+            return new Response('Не верный логин или пароль', 401);
+        }
+        
+        // dd('Пользователь авторизован');
+
+        return new Response('Пользователь авторизован', 201, [
+            'token' => $user->getToken()
+        ]);
+    }
 
 
 
