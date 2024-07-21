@@ -59,6 +59,18 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/api/is-admin', name: 'is-admin')]
+    public function isAdmin(): ?Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return new Response('true', 201);
+        } else {
+            return new Response('false', 401);
+        }
+    }
+
 
 
 

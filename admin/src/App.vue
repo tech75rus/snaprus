@@ -12,14 +12,18 @@ export default {
     MainLayout,
     LoginLayout
   },
+  beforeCreate() {
+    axios.get('http://localhost/api/is-admin', {
+      headers: {
+        'token': localStorage.getItem('token'),
+      }
+    }).catch(() => {
+      window.location.href = 'http://localhost:7777';
+    });
+  },
+  created() {
+  },
   mounted() {
-    // axios.get('http://localhost/projects', {
-    //     headers: {
-    //       'token': localStorage.getItem('token'),
-    //     }
-    //   }).then(response => {
-    //     console.log('test');
-    //   })
   },
   computed: {
     layout() {
