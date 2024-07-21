@@ -6,12 +6,20 @@
 <script>
 import MainLayout from "@/layouts/MainLayout.vue";
 import LoginLayout from "@/layouts/LoginLayout.vue";
+import axios from "axios";
 export default {
   components: {
     MainLayout,
     LoginLayout
   },
   mounted() {
+    // axios.get('http://localhost/projects', {
+    //     headers: {
+    //       'token': localStorage.getItem('token'),
+    //     }
+    //   }).then(response => {
+    //     console.log('test');
+    //   })
   },
   computed: {
     layout() {

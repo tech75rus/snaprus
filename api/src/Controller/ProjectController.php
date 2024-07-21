@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Repository\ProjectRepository;
 use App\Service\LoadImage;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,13 +21,11 @@ class ProjectController extends AbstractController
     public function getProject(int $id, ProjectRepository $projectRepository): Response
     {
         $project = $projectRepository->find($id);
-        if ($user = $this->getUser()) {
-            /** @var User $user */
-            $token = $user->getToken();
-        }
+        /** @var User $user */
+        $user = $this->getUser();
 
         return $this->json($project, 200, [
-            'token' => $token ?? ''
+            'token' => $user->getToken() ?? ''
         ]);
     }
 
@@ -42,6 +41,7 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/add-project', name: 'add_project', methods: ["POST"])]
+    #[IsGranted('ROLE_ADMIN')]
     public function addProject(Request $request, EntityManagerInterface $entityManager): Response
     {
         $nameProject = $request->request->get('name-project');
@@ -76,7 +76,12 @@ class ProjectController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
 
-        return new Response('Проект добавлен');
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return new Response('Проект добавлен', 201, [
+            'token' => $user->getToken() ?? ''
+        ]);
     }
 
     // #[Route('/about')]

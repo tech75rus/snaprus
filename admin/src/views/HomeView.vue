@@ -32,9 +32,13 @@ export default {
   created() {
   }, 
   async mounted() {
-    await axios.get('http://localhost/projects').then(response => {
+    await axios.get('http://localhost/projects', {
+      headers: {
+        'token': localStorage.getItem('token'),
+      }
+    }).then(response => {
+      localStorage.setItem('token', response.headers.token);
       this.projects = response.data;
-      console.log(response);
     }).catch(error => {
       console.log(error);
     })
