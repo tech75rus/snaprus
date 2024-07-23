@@ -18,7 +18,8 @@ export default {
         'token': localStorage.getItem('token'),
       }
     }).catch(() => {
-      window.location.href = 'http://localhost:7777';
+      // TODO сделать редирект на авторизацию
+      // window.location.href = 'http://localhost:7777';
     });
   },
   created() {
