@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -14,14 +16,44 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 class MainCustomAuthenticator extends AbstractAuthenticator
 {
+
+    public UserRepository $userRepository;
+
+    public EntityManagerInterface $em;
+
+    public string $token;
+
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $em)
+    {
+        $this->userRepository = $userRepository;
+        $this->em = $em;
+    }
+
     public function supports(Request $request): ?bool
     {
+        if ($request->getPathInfo() === '/api/registration-user') {
+            return false;
+        }
         return true;
     }
 
     public function authenticate(Request $request): Passport
     {
-        return new SelfValidatingPassport(new UserBadge('gladkix'));
+        if (!$request->headers->has('token')) {
+            $this->newGuest();
+        } else {
+            $this->token = $request->headers->get('token');
+            $user = $this->userRepository->findOneBy(['token' => $this->token]);
+            if ($user === null) {
+                $this->newGuest();
+            }
+        }
+
+        // $token = $request->request->get('token');
+
+        // /** @var User $user */
+        // $user = $this->userRepository->findOneBy(['token' => $token]);
+        return new SelfValidatingPassport(new UserBadge($this->token));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
@@ -31,7 +63,21 @@ class MainCustomAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        return new JsonResponse($exception->getMessageData(), 401);
+        return null;
+        // return new JsonResponse($exception->getMessageData(), 502);
+    }
+
+    private function newGuest()
+    {
+        $random = new \Random\Randomizer();
+        $this->token = md5(time()) . $random->getBytesFromString('abcdef0123456789', 36);
+        /** @var User $user */
+        $user = new User();
+        $user->setUsername('guest_' . $random->getBytesFromString('abcdef0123456789', 6));
+        $user->setToken($this->token);
+        $user->setPassword('guest_password');
+        $this->em->persist($user);
+        $this->em->flush();
     }
 
 //    public function start(Request $request, AuthenticationException $authException = null): Response

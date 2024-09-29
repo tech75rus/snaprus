@@ -52,8 +52,14 @@ export default {
   },
   async mounted() {
     let arr = [];
-    await axios.get('http://localhost/projects').then(response => {
+    await axios.get('http://localhost/projects', {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }).then(response => {
       arr = response.data;
+      let token = response.headers.token;
+      localStorage.setItem('token', token);
     }).catch(error => {
       console.log(error);
     })

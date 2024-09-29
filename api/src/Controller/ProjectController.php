@@ -3,14 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Project;
-use App\Repository\LikesRepository;
+use App\Entity\User;
 use App\Repository\ProjectRepository;
 use App\Service\LoadImage;
-use Doctrine\DBAL\Exception;
-use Doctrine\Migrations\Configuration\Migration\JsonFile;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,17 +21,27 @@ class ProjectController extends AbstractController
     public function getProject(int $id, ProjectRepository $projectRepository): Response
     {
         $project = $projectRepository->find($id);
-        return $this->json($project);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->json($project, 200, [
+            'token' => $user->getToken() ?? ''
+        ]);
     }
 
     #[Route('/projects', name: 'get_projects')]
     public function getProjects(ProjectRepository $projectRepository): Response
     {
         $projects = $projectRepository->findAll();
-        return $this->json($projects);
+        /** @var User $user */
+        $user = $this->getUser();
+        return $this->json($projects, 200, [
+            'token' => $user->getToken() ?? ''
+        ]);
     }
 
     #[Route('/add-project', name: 'add_project', methods: ["POST"])]
+    #[IsGranted('ROLE_ADMIN')]
     public function addProject(Request $request, EntityManagerInterface $entityManager): Response
     {
         $nameProject = $request->request->get('name-project');
@@ -68,7 +76,12 @@ class ProjectController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
 
-        return new Response('Проект добавлен');
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return new Response('Проект добавлен', 201, [
+            'token' => $user->getToken() ?? ''
+        ]);
     }
 
     // #[Route('/about')]

@@ -72,8 +72,16 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost/project/' + this.$route.params.id).then(response => {
+    axios.get('http://localhost/project/' + this.$route.params.id, {
+      headers: {
+        'token': localStorage.getItem('token')
+      }
+    }
+    ).then(response => {
       this.data = response.data;
+      localStorage.setItem('token', response.headers.token);
+    }).catch(error => {
+      console.log(error);
     })
   },
 }

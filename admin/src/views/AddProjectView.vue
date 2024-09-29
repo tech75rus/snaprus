@@ -61,9 +61,11 @@ export default {
 
       axios.post('http://localhost/add-project', form, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'token': localStorage.getItem('token'),
         }
       }).then(response => {
+        localStorage.setItem('token', response.headers.token);
         router.push({path: '/'});
       }).catch(error => {
         console.log(error);

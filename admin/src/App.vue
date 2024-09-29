@@ -6,10 +6,23 @@
 <script>
 import MainLayout from "@/layouts/MainLayout.vue";
 import LoginLayout from "@/layouts/LoginLayout.vue";
+import axios from "axios";
 export default {
   components: {
     MainLayout,
     LoginLayout
+  },
+  beforeCreate() {
+    axios.get('http://localhost/api/is-admin', {
+      headers: {
+        'token': localStorage.getItem('token'),
+      }
+    }).catch(() => {
+      // TODO сделать редирект на авторизацию
+      // window.location.href = 'http://localhost:7777';
+    });
+  },
+  created() {
   },
   mounted() {
   },
