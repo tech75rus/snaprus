@@ -1,0 +1,41 @@
+services:
+  api:
+    image: php:fpm-alpine
+    volumes:
+      - ./api:/var/www/api
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/app/prod/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+      - ./docker/app/prod/install.sh:/install.sh
+    entrypoint: ["/bin/sh", "/install.sh"]
+
+  admin:
+    build:
+      context: ./
+      dockerfile: ./docker/admin/prod/Dockerfile
+    volumes:
+      - ./admin:/var/www/admin
+      - ./docker/admin/prod/install.sh:/install.sh
+    entrypoint: ["/bin/sh", "/install.sh"]
+  
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/prod/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+      - ./admin:/var/www/admin
+      - ./api:/var/www/api
+      - ./docker/nginx/prod/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/prod/ssl-params.conf:/etc/nginx/snippets/ssl-params.conf
+      - /etc/letsencrypt/live/gladkix.com/fullchain.pem:/var/www/certificates/gladkix.com/fullchain.pem
+      - /etc/letsencrypt/live/gladkix.com/privkey.pem:/var/www/certificates/gladkix.com/privkey.pem
+
+    ports:
+      - "80:80"
+      - "443:443"
+
