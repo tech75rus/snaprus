@@ -1,7 +1,5 @@
 .DS_Store
-node_modules
-/dist
-
+docker/nginx/prod/certificates/
 
 # local env files
 .env.local
