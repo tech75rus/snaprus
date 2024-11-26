@@ -1,8 +1,14 @@
 services:
   api:
-    image: php:fpm-alpine
+    build:
+      context: ./
+      dockerfile: ./docker/api/prod/Dockerfile
+#    image: image_marina_api_prod
     volumes:
       - ./api:/var/www/api
+    restart: always
+#    container_name: marina_api_prod
+    entrypoint: ['/bin/sh', '/install.sh']
 
   app:
     build:
