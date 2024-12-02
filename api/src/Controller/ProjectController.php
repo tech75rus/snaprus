@@ -84,9 +84,10 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    // #[Route('/about')]
-    // public function aboutInfo(): void
-    // {
-    //     phpinfo();
-    // }
+    #[Route('/test')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function test(): Response
+    {
+        return new Response('Тестовый запрос');
+    }
 }
