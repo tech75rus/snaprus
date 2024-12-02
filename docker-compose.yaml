@@ -50,8 +50,8 @@ services:
     ports:
       - "1117:3306"
     volumes:
-      - mysql:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+      - ./docker/db/dev/database:/var/lib/mysql
+#    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: marina

@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     images_derictory: '%kernel.project_dir%/public/images/'
+    app.secrets: '%env(APP_SECRET)%'
 
 services:
     # default configuration for services in *this* file
