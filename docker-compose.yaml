@@ -15,31 +15,31 @@ services:
 #    depends_on:
 #      - db
 
-  app:
-    build:
-      context: ./
-      dockerfile: ./docker/app/dev/Dockerfile
-    image: image_marina_app_dev
-    volumes:
-      - ./app:/var/www/app
-    ports:
-      - "7777:8080"
-    restart: always
-    container_name: marina_app_dev
-    entrypoint: ['/bin/sh', '/install.sh']
+  # app:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./docker/app/dev/Dockerfile
+  #   image: image_marina_app_dev
+  #   volumes:
+  #     - ./app:/var/www/app
+  #   ports:
+  #     - "7777:8080"
+  #   restart: always
+  #   container_name: marina_app_dev
+  #   entrypoint: ['/bin/sh', '/install.sh']
 
-  admin:
-    build:
-      context: ./
-      dockerfile: ./docker/admin/dev/Dockerfile
-    image: image_marina_admin_dev
-    volumes:
-      - ./admin:/var/www/admin
-    ports:
-      - "7778:8080"
-    restart: always
-    container_name: marina_admin_dev
-    entrypoint: ['/bin/sh', '/install.sh']
+  # admin:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./docker/admin/dev/Dockerfile
+  #   image: image_marina_admin_dev
+  #   volumes:
+  #     - ./admin:/var/www/admin
+  #   ports:
+  #     - "7778:8080"
+  #   restart: always
+  #   container_name: marina_admin_dev
+  #   entrypoint: ['/bin/sh', '/install.sh']
 
   db:
     build:

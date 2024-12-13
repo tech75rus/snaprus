@@ -10,7 +10,7 @@
     </router-link>
     <router-link :to="'/project/' + project.id" class="project" v-for="project in projects">
       <div class="img">
-        <img :src="'http://localhost' + project.smallImage" alt="">
+        <img :src="url + project.smallImage" alt="">
       </div>
       <h3>{{ project.name }}</h3>
     </router-link>
@@ -27,12 +27,13 @@ export default {
   data() {
     return {
       projects: [],
+      url: process.env.VUE_APP_URL,
     }
   },
   created() {
   }, 
   async mounted() {
-    await axios.get('http://localhost/projects', {
+    await axios.get(this.url + '/projects', {
       headers: {
         'token': localStorage.getItem('token'),
       }

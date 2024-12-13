@@ -30,6 +30,7 @@ export default {
       descriptionProject: '',
       imageProject: '',
       testFile: '',
+      url: process.env.VUE_APP_URL
     }
   },
   mounted() {
@@ -59,7 +60,7 @@ export default {
 
       form.append('image-project', this.testFile);
 
-      axios.post('http://localhost/add-project', form, {
+      axios.post(this.url + '/add-project', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'token': localStorage.getItem('token'),

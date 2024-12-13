@@ -13,7 +13,7 @@ export default {
     LoginLayout
   },
   beforeCreate() {
-    axios.get('http://localhost/api/is-admin', {
+    axios.get(this.url + '/api/is-admin', {
       headers: {
         'token': localStorage.getItem('token'),
       }
@@ -32,6 +32,11 @@ export default {
     }
   },
   methods: {
+  },
+  data() {
+    return {
+      url: process.env.VUE_APP_URL
+    }
   }
 }
 </script>

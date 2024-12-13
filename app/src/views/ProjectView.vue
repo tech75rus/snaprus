@@ -1,6 +1,6 @@
 <template>
   <div class="work">
-    <img :src="'http://localhost' + data.bigImage" alt="">
+    <img :src="url + data.bigImage" alt="">
     <div class="icon">
       <div class="icon-comment">
         <svg width="22" height="15" viewBox="0 0 22 15" fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -62,17 +62,18 @@ export default {
   data() {
     return {
       data: '',
+      url: process.env.VUE_APP_URL,
     }
   },
   components: {
   },
   methods: {
     originImage() {
-      window.open('http://localhost' + this.data.imageOrigin);
+      window.open(this.url + this.data.imageOrigin);
     }
   },
   mounted() {
-    axios.get('http://localhost/project/' + this.$route.params.id, {
+    axios.get(this.url + '/project/' + this.$route.params.id, {
       headers: {
         'token': localStorage.getItem('token')
       }

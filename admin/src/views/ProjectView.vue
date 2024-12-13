@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <div class="image">
-      <a :href="'http://localhost' + project.imageOrigin" target="_blank">
-        <img :src="'http://localhost' + project.bigImage" alt="">
+      <a :href="url + project.imageOrigin" target="_blank">
+        <img :src="url + project.bigImage" alt="">
       </a>
     </div>
     <div class="header">
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       project: '',
+      url: process.env.VUE_APP_URL,
     }
   },
   components: {
@@ -29,7 +30,7 @@ export default {
   created() {
   },
   mounted() {
-    axios.get('http://localhost/project/' + this.$route.params.id, {
+    axios.get(this.url + '/project/' + this.$route.params.id, {
       headers: {
         'token': localStorage.getItem('token'),
       }
