@@ -10,7 +10,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      url: process.env.VUE_APP_URL
     }
   },
   components: {
@@ -18,7 +17,7 @@ export default {
     LoginLayout
   },
   beforeCreate() {
-    axios.get(this.url + '/api/is-admin', {
+    axios.get(process.env.VUE_APP_URL + '/api/is-admin', {
       headers: {
         'token': localStorage.getItem('token'),
       }
@@ -38,11 +37,6 @@ export default {
   },
   methods: {
   },
-  data() {
-    return {
-      url: process.env.VUE_APP_URL
-    }
-  }
 }
 </script>
 
