@@ -8,6 +8,11 @@ import MainLayout from "@/layouts/MainLayout.vue";
 import LoginLayout from "@/layouts/LoginLayout.vue";
 import axios from "axios";
 export default {
+  data() {
+    return {
+      url: process.env.VUE_APP_URL
+    }
+  },
   components: {
     MainLayout,
     LoginLayout
