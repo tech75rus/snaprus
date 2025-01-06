@@ -3,17 +3,19 @@ services:
     build:
       context: ./
       dockerfile: ./docker/api/prod/Dockerfile
-#    image: image_marina_api_prod
+    image: image_marina_api_prod
+    container_name: marina_api_prod
     volumes:
       - ./api:/var/www/api
     restart: always
-#    container_name: marina_api_prod
     entrypoint: ['/bin/sh', '/install.sh']
 
   app:
     build:
       context: ./
       dockerfile: ./docker/app/prod/Dockerfile
+    image: image_marina_app_prod
+    container_name: marina_app_prod
     volumes:
       - ./app:/var/www/app
       - ./docker/app/prod/install.sh:/install.sh
@@ -23,6 +25,8 @@ services:
     build:
       context: ./
       dockerfile: ./docker/admin/prod/Dockerfile
+    image: image_marina_admin_prod
+    container_name: marina_admin_prod
     volumes:
       - ./admin:/var/www/admin
       - ./docker/admin/prod/install.sh:/install.sh
@@ -32,6 +36,8 @@ services:
     build:
       context: ./
       dockerfile: ./docker/nginx/prod/Dockerfile
+    image: image_marina_nginx_prod
+    container_name: marina_nginx_prod
     volumes:
       - ./app:/var/www/app
       - ./admin:/var/www/admin
@@ -40,16 +46,19 @@ services:
       - ./docker/nginx/prod/ssl-params.conf:/etc/nginx/snippets/ssl-params.conf
       - ./docker/nginx/prod/certificates/fullchain.pem:/var/www/certificates/gladkix.com/fullchain.pem
       - ./docker/nginx/prod/certificates/privkey.pem:/var/www/certificates/gladkix.com/privkey.pem
-
     ports:
       - "80:80"
       - "443:443"
 
   db:
-    image: mysql:8.4
+    build: 
+      context: ./
+      dockerfile: ./docker/db/prod/Dockerfile
     restart: always
     volumes:
       - /home/gladkix/db:/var/lib/mysql
+    image: image_marina_db_prod
+    container_name: marina_db_prod
     environment:
       MYSQL_ROOT_PASSWORD: test
       MYSQL_DATABASE: marina

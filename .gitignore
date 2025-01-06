@@ -1,6 +1,7 @@
 .DS_Store
 docker/nginx/prod/certificates/
 docker/db/dev/database/
+docker/db/prod/database/
 
 # local env files
 .env.local
