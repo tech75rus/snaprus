@@ -6,40 +6,13 @@ services:
     image: image_marina_api_dev
     volumes:
       - ./api:/var/www/api
-      - ./api/dev/php.ini:/usr/local/etc/php/php.ini
-    ports:
-      - "80:8000"
+#      - ./api/dev/php.ini:/usr/local/etc/php/php.ini
     restart: always
     container_name: marina_api_dev
     entrypoint: ['/bin/sh', '/install.sh']
+    user: "1000:1000"
 #    depends_on:
 #      - db
-
-  # app:
-  #   build:
-  #     context: ./
-  #     dockerfile: ./docker/app/dev/Dockerfile
-  #   image: image_marina_app_dev
-  #   volumes:
-  #     - ./app:/var/www/app
-  #   ports:
-  #     - "7777:8080"
-  #   restart: always
-  #   container_name: marina_app_dev
-  #   entrypoint: ['/bin/sh', '/install.sh']
-
-  # admin:
-  #   build:
-  #     context: ./
-  #     dockerfile: ./docker/admin/dev/Dockerfile
-  #   image: image_marina_admin_dev
-  #   volumes:
-  #     - ./admin:/var/www/admin
-  #   ports:
-  #     - "7778:8080"
-  #   restart: always
-  #   container_name: marina_admin_dev
-  #   entrypoint: ['/bin/sh', '/install.sh']
 
   db:
     build:
@@ -58,6 +31,18 @@ services:
       MYSQL_USER: marina
       MYSQL_PASSWORD: 1234
     container_name: marina_db_dev
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/dev/Dockerfile
+    image: image_marina_nginx_dev
+    container_name: marina_nginx_dev
+    volumes:
+      - ./docker/nginx/dev/conf.d/api.conf:/etc/nginx/conf.d/api.conf
+      - ./api:/var/www/api
+    ports:
+      - 80:80
 
 volumes:
   mysql:

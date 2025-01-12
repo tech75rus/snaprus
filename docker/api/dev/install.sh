@@ -2,4 +2,6 @@
 
 composer install
 
-symfony server:start
+symfony console --no-interaction doctrine:migrations:migrate
+
+php-fpm
