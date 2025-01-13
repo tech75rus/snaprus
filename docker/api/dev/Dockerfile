@@ -1,4 +1,4 @@
-FROM php:8.4-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 RUN apk update && apk add --no-cache \ 
     $PHPIZE_DEPS \
@@ -26,13 +26,13 @@ RUN apk update && apk add --no-cache \
 
 RUN docker-php-ext-install -j$(nproc) opcache bcmath zip pdo pdo_mysql
 
-# Это для установки Imagick библеотеки для PHP 8.4 так как без нее устанавливается
-# ./configure CPPFLAGS='-Dphp_strtolower=zend_str_tolower' это строка самая важная
-# именно она устраняет ошибку с функциями в языке C(вроде бы)
+# Это для установки Imagick библеотеки вручную настраивает и компилирует
 RUN git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
     cd /tmp/imagick && \
     phpize && \
-    ./configure CPPFLAGS='-Dphp_strtolower=zend_str_tolower' && \
+    ./configure && \
+# это строка нужна для версии PHP 8.4 на момент написания Dockerfile
+#    ./configure CPPFLAGS='-Dphp_strtolower=zend_str_tolower' && \
     make && \
     make install
 
