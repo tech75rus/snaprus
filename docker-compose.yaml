@@ -6,7 +6,7 @@ services:
     image: image_marina_api_dev
     volumes:
       - ./api:/var/www/api
-#      - ./api/dev/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/api/dev/php.ini:/usr/local/etc/php/php.ini
     restart: always
     container_name: marina_api_dev
     entrypoint: ['/bin/sh', '/install.sh']
