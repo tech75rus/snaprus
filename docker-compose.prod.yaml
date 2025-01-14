@@ -7,8 +7,10 @@ services:
     container_name: marina_api_prod
     volumes:
       - ./api:/var/www/api
+      - ./docker/api/prod/php.ini:/usr/local/etc/php/php.ini
     restart: always
     entrypoint: ['/bin/sh', '/install.sh']
+    user: "1000:1000"
 
   app:
     build:
