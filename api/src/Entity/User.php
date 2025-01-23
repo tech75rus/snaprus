@@ -36,6 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 70, nullable: true)]
     private ?string $token = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $create_at = null;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -149,6 +152,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setToken(?string $token): static
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->create_at;
+    }
+
+    public function setCreateAt(?\DateTimeImmutable $create_at): static
+    {
+        $this->create_at = $create_at;
 
         return $this;
     }
