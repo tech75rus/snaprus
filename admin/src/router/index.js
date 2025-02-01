@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import ProjectView from '../views/ProjectView.vue';
 import AddProjectView from '../views/AddProjectView.vue';
 import PageNotFound from "@/components/PageNotFound.vue";
+import Auth from '@/views/Auth.vue';
 
 const routes = [
   {
@@ -35,6 +36,7 @@ const routes = [
     meta: {
       layout: 'login'
     },
+    component: Auth
   },
   {
     path: '/:pathMatch(.*)*',

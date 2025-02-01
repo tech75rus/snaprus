@@ -1,0 +1,32 @@
+@use 'color' as color;
+
+
+input {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+  height: 30px;
+  text-align: left;
+  border-radius: 5px;
+  background-color: color.$additional;
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+input[type="submit"] {
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    color: color.$active-text;
+  }
+}
+textarea {
+  text-align: left;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  &:focus::placeholder {
+    color: transparent;
+  }
+}

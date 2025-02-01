@@ -47,7 +47,7 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; // перестает мигать кнопка синим цветом и ссылки а может еще что:)
+  -webkit-tap-highlight-color: transparent; // перестает при нажатие мигать кнопка синим цветом и ссылки а может еще что:)
 }
 body {
   background-color: $main;
