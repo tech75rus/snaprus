@@ -2,15 +2,16 @@
   <div class="auth">
     <div class="block">
       <h2>Авторизация</h2>
-      <input type="text" placeholder="Введите имя">
-      <input type="password" placeholder="Введите пароль">
-      <input type="submit" value="Вход">
+      <input type="text" v-model.lazy="user" placeholder="Введите имя">
+      <input type="password" v-model.lazy="password" placeholder="Введите пароль">
+      <input type="submit" @click="queryAuth" value="Вход">
+      <p class="message">{{ message }}</p>
     </div>
   </div>
 </template>
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
 
 export default {
   name: 'Auth',
@@ -18,9 +19,30 @@ export default {
   },
   data() {
     return {
+      url: process.env.VUE_APP_URL,
+      user: '',
+      password: '',
+      message: '',
     }
   },
   async mounted() {
+  },
+  methods: {
+    queryAuth() {
+      let form = new FormData();
+      form.append('name', this.user);
+      form.append('password', this.password);
+      axios.post(this.url + '/login', form, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Token' : localStorage.getItem('token'),
+        }
+      }).then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
   }
 
 }
