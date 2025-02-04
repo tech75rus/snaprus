@@ -37,7 +37,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/api/authentication', name: 'authentication', methods: ['POST'])]
+    #[Route('/api/login', name: 'authentication', methods: ['POST'])]
     public function authenticationUser(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $hashPassword): ?Response
     {
         if (!$request->request->has('name') && !$request->request->has('password')) {
@@ -51,8 +51,6 @@ class UserController extends AbstractController
         if (!$hashPassword->isPasswordValid($user, $request->request->get('password'))) {
             return new Response('Не верный логин или пароль', 401);
         }
-        
-        // dd('Пользователь авторизован');
 
         return new Response('Пользователь авторизован', 201, [
             'token' => $user->getToken()

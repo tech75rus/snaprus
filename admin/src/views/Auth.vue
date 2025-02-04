@@ -32,15 +32,16 @@ export default {
       let form = new FormData();
       form.append('name', this.user);
       form.append('password', this.password);
-      axios.post(this.url + '/login', form, {
+      axios.post(this.url + '/api/login', form, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Token' : localStorage.getItem('token'),
         }
       }).then(response => {
-        console.log(response);
+        localStorage.setItem('token', response.headers.token);
+        this.message = response.data;
       }).catch(error => {
-        console.log(error);
+        this.message = error.response.data
       })
     }
   }
