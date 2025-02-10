@@ -4,7 +4,6 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,8 +32,14 @@ class MainCustomAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        if ($request->getPathInfo() === '/api/registration-user') {
+        if (!$request->headers->has('token') || $request->getPathInfo() === '/api/login') {
             return false;
+        }
+        if ($request->headers->has('token') && $request->getPathInfo() === '/api/is-admin') {
+            $user = $this->userRepository->findOneBy(['token' => $request->headers->get('token')]);
+            if ($user === null) {
+                return false;
+            }
         }
         return true;
     }

@@ -62,10 +62,10 @@ class UserController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            return new Response('true', 201);
-        } else {
+        if ($user === null || !in_array('ROLE_ADMIN', $user->getRoles())) {
             return new Response('false', 401);
+        } else {
+            return new Response('true', 201);
         }
     }
 
