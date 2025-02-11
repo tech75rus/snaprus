@@ -1,12 +1,12 @@
 <template>
   <div class="auth">
-    <div class="block">
+    <form class="block" @submit.prevent="queryAuth">
       <h2>Авторизация</h2>
       <input type="text" v-model.lazy="user" placeholder="Введите имя">
       <input type="password" v-model.lazy="password" placeholder="Введите пароль">
-      <input type="submit" @click="queryAuth" value="Вход">
+      <input type="submit" value="Вход">
       <p class="message">{{ message }}</p>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
       }).then(response => {
         localStorage.setItem('token', response.headers.token);
         this.message = response.data;
+        this.$router.replace('/');
       }).catch(error => {
         this.message = error.response.data
       })
