@@ -46,8 +46,8 @@ services:
       - ./api:/var/www/api
       - ./docker/nginx/prod/conf.d:/etc/nginx/conf.d
       - ./docker/nginx/prod/ssl-params.conf:/etc/nginx/snippets/ssl-params.conf
-      - ./docker/nginx/prod/certificates/fullchain.pem:/var/www/certificates/gladkix.com/fullchain.pem
-      - ./docker/nginx/prod/certificates/privkey.pem:/var/www/certificates/gladkix.com/privkey.pem
+      - ./docker/nginx/prod/certificates/fullchain.pem:/var/www/certificates/fullchain.pem
+      - ./docker/nginx/prod/certificates/privkey.pem:/var/www/certificates/privkey.pem
     ports:
       - "80:80"
       - "443:443"
