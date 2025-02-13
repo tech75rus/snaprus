@@ -11,6 +11,8 @@ services:
     restart: always
     entrypoint: ['/bin/sh', '/install.sh']
     user: "1000:1000"
+    depends_on:
+      - db
 
   app:
     build:
@@ -51,6 +53,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - api
 
   db:
     build: 

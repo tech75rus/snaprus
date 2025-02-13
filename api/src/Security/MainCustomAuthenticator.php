@@ -32,7 +32,7 @@ class MainCustomAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        if (!$request->headers->has('token') || $request->getPathInfo() === '/api/login') {
+        if ($request->getPathInfo() === '/api/login') {
             return false;
         }
         if ($request->headers->has('token') && $request->getPathInfo() === '/api/is-admin') {
