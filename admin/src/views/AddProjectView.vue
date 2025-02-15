@@ -20,7 +20,7 @@
 
 <script>
 import router from "@/router";
-import axios from "axios";
+import apiClient from "@/assets/js/axios";
 
 export default {
   name: 'AddProjectView',
@@ -30,7 +30,6 @@ export default {
       descriptionProject: '',
       imageProject: '',
       testFile: '',
-      url: process.env.VUE_APP_URL
     }
   },
   mounted() {
@@ -60,7 +59,7 @@ export default {
 
       form.append('image-project', this.testFile);
 
-      axios.post(this.url + '/add-project', form, {
+      apiClient.post('/add-project', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'token': localStorage.getItem('token'),

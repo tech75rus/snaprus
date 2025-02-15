@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import apiClient from '@/assets/js/axios';
 
 export default {
   name: 'HomeView',
@@ -33,7 +33,7 @@ export default {
   created() {
   }, 
   async mounted() {
-    await axios.get(this.url + '/projects', {
+    await apiClient.get('/projects', {
       headers: {
         'token': localStorage.getItem('token'),
       }

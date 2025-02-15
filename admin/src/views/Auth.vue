@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import apiClient from '@/assets/js/axios';
 
 export default {
   name: 'Auth',
@@ -19,7 +19,6 @@ export default {
   },
   data() {
     return {
-      url: process.env.VUE_APP_URL,
       user: '',
       password: '',
       message: '',
@@ -32,7 +31,7 @@ export default {
       let form = new FormData();
       form.append('name', this.user);
       form.append('password', this.password);
-      axios.post(this.url + '/api/login', form, {
+      apiClient.post('/api/login', form, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Token' : localStorage.getItem('token'),

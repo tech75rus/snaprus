@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import apiClient from '@/assets/js/axios';
 
 export default {
   name: 'ProjectView',
@@ -30,7 +30,7 @@ export default {
   created() {
   },
   mounted() {
-    axios.get(this.url + '/project/' + this.$route.params.id, {
+    apiClient.get('/project/' + this.$route.params.id, {
       headers: {
         'token': localStorage.getItem('token'),
       }
