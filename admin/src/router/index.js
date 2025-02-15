@@ -4,7 +4,7 @@ import ProjectView from '../views/ProjectView.vue';
 import AddProjectView from '../views/AddProjectView.vue';
 import PageNotFound from "@/components/PageNotFound.vue";
 import Auth from '@/views/Auth.vue';
-import axios from 'axios';
+import apiClient from '@/assets/js/axios';
 
 const routes = [
   {
@@ -52,11 +52,8 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   let auth = false;
-  await axios.post(process.env.VUE_APP_URL + '/api/is-admin', {}, {
-    headers: {
-      'token': localStorage.getItem('token'),
-    }
-  }).then(() => {
+  await apiClient.post('/api/is-admin')
+  .then(() => {
     auth = true;
   }).catch(() => {
     localStorage.removeItem('token');

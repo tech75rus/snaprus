@@ -55,11 +55,6 @@ class MainCustomAuthenticator extends AbstractAuthenticator
                 $this->newGuest();
             }
         }
-
-        // $token = $request->request->get('token');
-
-        // /** @var User $user */
-        // $user = $this->userRepository->findOneBy(['token' => $token]);
         return new SelfValidatingPassport(new UserBadge($this->token));
     }
 
