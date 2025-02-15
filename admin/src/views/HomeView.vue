@@ -33,11 +33,7 @@ export default {
   created() {
   }, 
   async mounted() {
-    await apiClient.get('/projects', {
-      headers: {
-        'token': localStorage.getItem('token'),
-      }
-    }).then(response => {
+    await apiClient.get('/projects').then(response => {
       localStorage.setItem('token', response.headers.token);
       this.projects = response.data;
     }).catch(error => {

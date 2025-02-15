@@ -30,11 +30,7 @@ export default {
   created() {
   },
   mounted() {
-    apiClient.get('/project/' + this.$route.params.id, {
-      headers: {
-        'token': localStorage.getItem('token'),
-      }
-    }).then(response => {
+    apiClient.get('/project/' + this.$route.params.id).then(response => {
       localStorage.setItem('token', response.headers.token);
       this.project = response.data;
     });

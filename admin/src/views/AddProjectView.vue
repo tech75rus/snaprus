@@ -62,7 +62,6 @@ export default {
       apiClient.post('/add-project', form, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'token': localStorage.getItem('token'),
         }
       }).then(response => {
         localStorage.setItem('token', response.headers.token);

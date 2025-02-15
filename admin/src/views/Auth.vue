@@ -34,7 +34,6 @@ export default {
       apiClient.post('/api/login', form, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Token' : localStorage.getItem('token'),
         }
       }).then(response => {
         localStorage.setItem('token', response.headers.token);
