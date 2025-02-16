@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import apiClient from '@/assets/js/axios';
 
 export default {
   name: 'WorkView',
@@ -73,16 +73,11 @@ export default {
     }
   },
   mounted() {
-    axios.get(this.url + '/project/' + this.$route.params.id, {
-      headers: {
-        'token': localStorage.getItem('token')
-      }
-    }
-    ).then(response => {
+    apiClient.get('/project/' + this.$route.params.id).then(response => {
       this.data = response.data;
       localStorage.setItem('token', response.headers.token);
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
     })
   },
 }

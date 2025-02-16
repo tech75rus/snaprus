@@ -15,8 +15,7 @@
 
 <script>
 import router from "@/router";
-import axios from "axios";
-import { routeLocationKey } from "vue-router";
+import apiClient from "@/assets/js/axios";
 
 export default {
   name: 'Gallery',
@@ -32,16 +31,12 @@ export default {
   },
   async mounted() {
     let arr = [];
-    await axios.get(this.url + '/projects', {
-      headers: {
-        token: localStorage.getItem('token')
-      }
-    }).then(response => {
+    await apiClient.get('/projects').then(response => {
       arr = response.data;
       let token = response.headers.token;
       localStorage.setItem('token', token);
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
     })
     while (arr.length > 5) {
       this.images.push(arr.splice(0, 6));
