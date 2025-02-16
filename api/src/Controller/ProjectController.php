@@ -23,9 +23,13 @@ class ProjectController extends AbstractController
         $project = $projectRepository->find($id);
         /** @var User $user */
         $user = $this->getUser();
+        $token = '';
+        if ($user !== null) {
+            $token = $user->getToken();
+        }
 
         return $this->json($project, 200, [
-            'token' => $user->getToken() ?? ''
+            'token' => $token
         ]);
     }
 
@@ -35,8 +39,12 @@ class ProjectController extends AbstractController
         $projects = $projectRepository->findAll();
         /** @var User $user */
         $user = $this->getUser();
+        $token = '';
+        if ($user !== null) {
+            $token = $user->getToken();
+        }
         return $this->json($projects, 200, [
-            'token' => $user->getToken() ?? ''
+            'token' => $token
         ]);
     }
 
