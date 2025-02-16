@@ -32,12 +32,19 @@ class MainCustomAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
+        if ($request->headers->get('app') !== '1') {
+            return false;
+        }
         if ($request->getPathInfo() === '/api/login') {
             return false;
         }
-        if ($request->headers->has('token') && $request->getPathInfo() === '/api/is-admin') {
-            $user = $this->userRepository->findOneBy(['token' => $request->headers->get('token')]);
-            if ($user === null) {
+        if ($request->getPathInfo() === '/api/is-admin') {
+            if ($request->headers->has('token')) {
+                $user = $this->userRepository->findOneBy(['token' => $request->headers->get('token')]);
+                if ($user === null) {
+                    return false;
+                }
+            } else {
                 return false;
             }
         }
