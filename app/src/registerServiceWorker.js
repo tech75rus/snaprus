@@ -21,7 +21,6 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated () {
       console.log('New content is available; please refresh.')
-      let isReloaded = false;
       if (!isReloaded) {
         isReloaded = true;
         window.location.reload(true);
