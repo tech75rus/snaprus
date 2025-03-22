@@ -11,6 +11,9 @@
     <div class="description">
       <p>{{ project.description }}</p>
     </div>
+    <div class="delete">
+      <button>Удалить</button>
+    </div>
   </div>
 </template>
 
@@ -39,6 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/scss/button";
+
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
