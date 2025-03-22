@@ -92,6 +92,19 @@ class ProjectController extends AbstractController
         ]);
     }
 
+    #[Route('/delete-project/{id}')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deleteProject(int $id, ProjectRepository $projectRepository, EntityManagerInterface $entityManager): Response
+    {
+        $project = $projectRepository->find($id);
+        if ($project === null) {
+            return new Response('Не существует такого проекта');
+        }
+        $projectRepository->remove($project);
+        $entityManager->flush();
+        return new Response('Проект удален');
+    }
+
     #[Route('/test')]
     #[IsGranted('ROLE_ADMIN')]
     public function test(): Response
