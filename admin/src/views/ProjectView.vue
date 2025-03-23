@@ -11,7 +11,7 @@
     <div class="description">
       <p>{{ project.description }}</p>
     </div>
-    <div class="delete">
+    <div class="delete" @click="deleteProject">
       <button>Удалить</button>
     </div>
   </div>
@@ -19,6 +19,7 @@
 
 <script>
 import apiClient from '@/assets/js/axios';
+import router from '@/router';
 
 export default {
   name: 'ProjectView',
@@ -37,6 +38,20 @@ export default {
       localStorage.setItem('token', response.headers.token);
       this.project = response.data;
     });
+  },
+  methods: {
+    deleteProject() {
+      apiClient.post('/delete-project/' + this.$route.params.id, {}, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      }).then(response => {
+        console.log(response.data);
+        router.push({path: '/'});
+      }).catch(error => {
+        console.log(error);
+      })
+    }
   }
 }
 </script>

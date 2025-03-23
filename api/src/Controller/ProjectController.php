@@ -92,7 +92,7 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/delete-project/{id}')]
+    #[Route('/delete-project/{id}', methods: ["POST"])]
     #[IsGranted('ROLE_ADMIN')]
     public function deleteProject(int $id, ProjectRepository $projectRepository, EntityManagerInterface $entityManager): Response
     {
