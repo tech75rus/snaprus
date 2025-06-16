@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.3-fpm-alpine3.17
 
 RUN apk update && apk add --no-cache \ 
     $PHPIZE_DEPS \
@@ -42,7 +42,7 @@ RUN apk add --no-cache bash \
     && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
     && apk add symfony-cli
 
-RUN apk del git gcc g++ make autoconf pkgconfig && \
+RUN apk del git make autoconf pkgconfig && \
     rm -rf /var/cache/apk/* /tmp/imagick
 
 RUN adduser -D -u 1000 gladkix
