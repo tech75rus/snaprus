@@ -39,6 +39,15 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+
+   public function findAllProjectsDesc(): array
+   {
+       return $this->createQueryBuilder('p')
+           ->orderBy('p.id', 'DESC')
+           ->getQuery()
+           ->getResult();
+   }
+
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */

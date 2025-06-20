@@ -36,7 +36,7 @@ class ProjectController extends AbstractController
     #[Route('/projects', name: 'get_projects')]
     public function getProjects(ProjectRepository $projectRepository): Response
     {
-        $projects = $projectRepository->findAll();
+        $projects = $projectRepository->findAllProjectsDesc();
         /** @var User $user */
         $user = $this->getUser();
         $token = '';
