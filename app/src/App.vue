@@ -3,7 +3,7 @@
     <div class="menu">
       <div class="center">
         <div class="logo">
-          <router-link to="/" style="text-decoration: none; color: #2c3e50;">SnapRus</router-link>
+          <router-link to="/" style="text-decoration: none; color: #2c3e50;">FotoStudio</router-link>
         </div>
 
         <div class="user">
@@ -89,6 +89,10 @@ svg {
       height: 100%;
       display: flex;
       align-items: center;
+      a {
+        font-size: 36px;
+        font-family: 'Vibur';
+      }
     }
     .user {
       position: relative;
@@ -139,7 +143,13 @@ svg {
   font-display: auto;
   src: local('Inter'), url("./assets/font-family/Inter-Regular.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Vibur";
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+  src: local('Vibur'), url("./assets/font-family/Vibur-Regular.ttf") format("truetype");
+}
 
 
 //nav {
