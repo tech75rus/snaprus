@@ -1,4 +1,4 @@
-# Приложение Marina
+# Приложение SnapRus
 
 ### Установка для development
 ```
